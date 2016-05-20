@@ -18,18 +18,19 @@ angular
         url:'/',
         views: {
           'header': {
-            templateUrl : 'views/header.html',
+            templateUrl : 'views/front/header.html',
             controller  : 'HeaderCtrl'
           },
           'subheader': {
-            templateUrl : 'views/subheader.html'
+            templateUrl : 'views/front/subheader.html',
+            controller  : 'SubheaderCtrl'
           },
           'content': {
-            templateUrl : 'views/home.html',
+            templateUrl : 'views/front/home.html',
             controller  : 'HomeCtrl'
           },
           'footer': {
-            templateUrl : 'views/footer.html'
+            templateUrl : 'views/front/footer.html'
           }
         }
       })
@@ -39,7 +40,17 @@ angular
         url:'aboutus',
         views: {
           'content@': {
-            templateUrl : 'views/aboutus.html'                 
+            templateUrl : 'views/front/aboutus.html'                 
+          }
+        }
+      })
+      
+      // route for the contactus page
+      .state('app.contactus', {
+        url:'contactus',
+        views: {
+          'content@': {
+            templateUrl : 'views/front/contactus.html'                 
           }
         }
       })

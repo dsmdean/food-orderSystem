@@ -1,5 +1,5 @@
 <!-- SubHeader =============================================== -->
-    <section class="parallax-window" id="home" data-parallax="scroll" data-image-src="images/sub_header_home.png" data-natural-width="1400" data-natural-height="550">
+    <section class="parallax-window" id="home" data-parallax="scroll" data-image-src="images/sub_header_home.png" data-natural-width="1400" data-natural-height="550" ng-show="stateis('app')">
     <div id="subheader">
         <div id="sub_content">
             <h1>Order <strong id="js-rotating">Takeaway,Delivery,Quick</strong> Food</h1>
@@ -26,4 +26,15 @@
         </ul>
     </div>
     </section><!-- End section -->
+    
+    
+<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="images/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350" ng-show="!stateis('app')">
+    <div id="subheader">
+    	<div id="sub_content">
+    	 <h1>About us</h1>
+         <p>Qui debitis meliore ex, tollit debitis conclusionemque te eos.</p>
+         <p></p>
+        </div><!-- End sub_content -->
+	</div><!-- End subheader -->
+</section><!-- End section -->
 <!-- End SubHeader ============================================ -->
