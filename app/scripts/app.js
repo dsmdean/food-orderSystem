@@ -9,25 +9,41 @@
  * Main module of the application.
  */
 angular
-  .module('orderSystemApp', [
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+  .module('orderSystemApp', ['ui.router','ngResource','ngDialog'])
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+    
+      // route for the home page
+      .state('app', {
+        url:'/',
+        views: {
+          'header': {
+            templateUrl : 'views/header.html',
+            controller  : 'HeaderCtrl'
+          },
+          'subheader': {
+            templateUrl : 'views/subheader.html'
+          },
+          'content': {
+            templateUrl : 'views/home.html',
+            controller  : 'HomeCtrl'
+          },
+          'footer': {
+            templateUrl : 'views/footer.html'
+          }
+        }
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      
+      // route for the aboutus page
+      .state('app.aboutus', {
+        url:'aboutus',
+        views: {
+          'content@': {
+            templateUrl : 'views/aboutus.html'                 
+          }
+        }
       })
-      .otherwise({
-        redirectTo: '/'
-      });
+      ;
+      
+      $urlRouterProvider.otherwise('/');
   });
