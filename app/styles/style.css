@@ -2065,3 +2065,13 @@ a.bt_filters{
    border:none;
    border-right: 1px solid #ededed;
 } 
+
+.subheader-custom {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
