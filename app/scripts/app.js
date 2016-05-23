@@ -155,92 +155,130 @@ angular
         }
       })
       
-      
       // route for the dashboard page
-      .state('adminApp', {
-        url:'/admin/',
+      .state('app.admin-dashboard', {
+        url:'admin',
         views: {
           'header@': {
-            templateUrl : ''
-          },
-          'subheader@': {
-            templateUrl : ''
+            templateUrl : 'views/admin/header.html'              
           },
           'content@': {
-            templateUrl : 'views/admin/dashboard.html'
+            templateUrl : 'views/admin/dashboard.html'              
           },
           'footer@': {
-            templateUrl : ''
+            templateUrl : 'views/admin/footer.html'              
           }
         }
       })
       
       // route for the category page
-      .state('adminApp.category', {
-        url:'/admin/category',
+      .state('app.admin-category', {
+        url:'admin/category',
         views: {
+          'header@': {
+            templateUrl : 'views/admin/header.html'              
+          },
           'content@': {
-            templateUrl : ''                 
+            templateUrl : 'views/admin/category.html'              
+          },
+          'footer@': {
+            templateUrl : 'views/admin/footer.html'              
           }
         }
       })
       
       // route for the category details page
-      .state('adminApp.category-details', {
-        url:'/admin/category-details',
+      .state('app.admin-category-details', {
+        url:'admin/category-details',
         views: {
+          'header@': {
+            templateUrl : 'views/admin/header.html'              
+          },
           'content@': {
-            templateUrl : ''                 
+            templateUrl : 'views/admin/category-details.html'              
+          },
+          'footer@': {
+            templateUrl : 'views/admin/footer.html'              
           }
         }
       })
       
       // route for the products page
-      .state('adminApp.products', {
-        url:'/admin/products',
+      .state('app.admin-products', {
+        url:'admin/products',
         views: {
+          'header@': {
+            templateUrl : 'views/admin/header.html'              
+          },
           'content@': {
-            templateUrl : ''                 
+            templateUrl : 'views/admin/products.html'              
+          },
+          'footer@': {
+            templateUrl : 'views/admin/footer.html'              
           }
         }
       })
       
       // route for the product details page
-      .state('adminApp.product-details', {
-        url:'/admin/product-details',
+      .state('app.admin-product-details', {
+        url:'admin/product-details',
         views: {
+          'header@': {
+            templateUrl : 'views/admin/header.html'              
+          },
           'content@': {
-            templateUrl : ''                 
+            templateUrl : 'views/admin/product-details.html'              
+          },
+          'footer@': {
+            templateUrl : 'views/admin/footer.html'              
           }
         }
       })
       
       // route for the profile page
-      .state('adminApp.profile', {
-        url:'/admin/profile',
+      .state('app.admin-profile', {
+        url:'admin/profile',
         views: {
+          'header@': {
+            templateUrl : 'views/admin/header.html'              
+          },
           'content@': {
-            templateUrl : ''                 
+            templateUrl : 'views/admin/profile.html'              
+          },
+          'footer@': {
+            templateUrl : 'views/admin/footer.html'              
           }
         }
       })
       
       // route for the orders page
-      .state('adminApp.orders', {
-        url:'/admin/orders',
+      .state('app.admin-orders', {
+        url:'admin/orders',
         views: {
+          'header@': {
+            templateUrl : 'views/admin/header.html'              
+          },
           'content@': {
-            templateUrl : ''                 
+            templateUrl : 'views/admin/orders.html'              
+          },
+          'footer@': {
+            templateUrl : 'views/admin/footer.html'              
           }
         }
       })
       
       // route for the order details page
-      .state('adminApp.order-details', {
-        url:'/admin/order-details',
+      .state('app.admin-order-details', {
+        url:'admin/order-details',
         views: {
+          'header@': {
+            templateUrl : 'views/admin/header.html'              
+          },
           'content@': {
-            templateUrl : ''                 
+            templateUrl : 'views/admin/order-details.html'              
+          },
+          'footer@': {
+            templateUrl : 'views/admin/footer.html'              
           }
         }
       })
