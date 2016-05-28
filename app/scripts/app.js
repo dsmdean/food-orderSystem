@@ -100,7 +100,8 @@ angular
         url:'companies',
         views: {
           'content@': {
-            templateUrl : 'views/front/companies.html'                 
+            templateUrl : 'views/front/companies.html',
+            controller  : 'CompaniesCtrl'                 
           }
         }
       })
@@ -158,6 +159,21 @@ angular
       // route for the dashboard page
       .state('app.admin-dashboard', {
         url:'admin',
+        views: {
+          'header@': {
+            templateUrl : 'views/admin/header.html'              
+          },
+          'content@': {
+            templateUrl : 'views/admin/dashboard.html'              
+          },
+          'footer@': {
+            templateUrl : 'views/admin/footer.html'              
+          }
+        }
+      })
+      
+      .state('app.admin-dashboard-', {
+        url:'admin/',
         views: {
           'header@': {
             templateUrl : 'views/admin/header.html'              
