@@ -1,0 +1,68 @@
+    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+        
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="http://www.creative-tim.com" class="simple-text">
+                    Order System
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li ng-class="{active: stateis('app.admin-dashboard') || stateis('app.admin-dashboard-')}">
+                    <a ui-sref="app.admin-dashboard">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li ng-class="{active: stateis('app.admin-category') || stateis('app.admin-category-add') || stateis('app.admin-category-details')}">
+                    <a ui-sref="app.admin-category">
+                        <i class="pe-7s-note2"></i>
+                        <p>Category</p>
+                    </a>
+                </li>
+                <li ng-class="{active: stateis('app.admin-dishcategory') || stateis('app.admin-dishcategory-add') || stateis('app.admin-dishcategory-details')}">
+                    <a ui-sref="app.admin-dishcategory">
+                        <i class="pe-7s-note2"></i>
+                        <p>Dish Category</p>
+                    </a>
+                </li>
+                <li ng-class="{active: stateis('app.admin-products') || stateis('app.admin-products-add') || stateis('app.admin-products-details')}">
+                    <a ui-sref="app.admin-products">
+                        <i class="pe-7s-note2"></i>
+                        <p>Products</p>
+                    </a>
+                </li>
+                <li ng-class="{active: stateis('app.admin-orders') || stateis('app.admin-orders-details')}">
+                    <a ui-sref="app.admin-orders">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Orders</p>
+                    </a>
+                </li>
+                <li ng-class="{active: stateis('app.admin-profile')}">
+                    <a ui-sref="app.admin-profile">
+                        <i class="pe-7s-user"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="maps.html">
+                        <i class="pe-7s-map-marker"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="notifications.html">
+                        <i class="pe-7s-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>

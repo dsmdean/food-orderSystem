@@ -19,18 +19,19 @@
                     <li><a ui-sref="app">Home</a></li>
                     <li><a ui-sref="app.products">Products</a></li>
                     <li><a ui-sref="app.companies">Companies</a></li>
-                    <li class="submenu">
-                    <a href="javascript:void(0);" class="show-submenu">User<i class="icon-down-open-mini"></i></a>
-                    <ul>
-                        <li><a ui-sref="app.profile">Profile</a></li>
-                        <li><a ui-sref="app.favorites">Favorites</a></li>
-                    </ul>
-                    </li>
                     <li><a ui-sref="app.aboutus">About Us</a></li>
                     <li><a ui-sref="app.faq">Faq</a></li>
                     <li><a ui-sref="app.contactus">Contact Us</a></li>
-                    <li><a ui-sref="app.admin-dashboard">Dashboard</a></li>
-                    <li><a data-toggle="modal" data-target="#login_2">Login</a></li>
+                    <li class="submenu" ng-if="loggedIn">
+                        <a href="javascript:void(0);" class="show-submenu">User<i class="icon-down-open-mini"></i></a>
+                        <ul>
+                            <li><a ui-sref="app.profile">{{user.firstname}} {{user.lastname}}</a></li>
+                            <li><a ui-sref="app.favorites">Favorites</a></li>
+                            <li ng-if="company"><a ui-sref="app.admin-dashboard-">Admin Panel</a></li>
+                        </ul>
+                    </li>
+                    <li ng-if="!loggedIn"><a href="" data-toggle="modal" data-target="#login_2">Login</a></li>
+                    <li ng-if="loggedIn"><a href="" ng-click="logOut()">Logout</a></li>
                 </ul>
             </div><!-- End main-menu -->
             </nav>
@@ -38,3 +39,53 @@
     </div><!-- End container -->
     </header>
 <!-- End Header =============================================== -->
+
+<!-- Login modal -->   
+<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content modal-popup">
+				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+				<form action="#" class="popup-form" id="myLogin" ng-submit="doLogin()">
+                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
+					<input type="text" class="form-control form-white" placeholder="Username" ng-model="loginData.username">
+					<input type="password" class="form-control form-white" placeholder="Password" ng-model="loginData.password">
+					<div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="rememberMe"> Remember me
+                        </label>
+                    </div>
+                    <div class="text-left">
+						<a href="#">Forgot Password?</a>
+					</div>
+					<button type="submit" class="btn btn-submit">Login</button>
+				</form>
+			</div>
+		</div>
+	</div>
+<!-- End modal -->   
+    
+<!-- Register modal -->   
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content modal-popup">
+				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+				<form action="#" class="popup-form" id="myRegister">
+                	<div class="login_icon"><i class="icon_lock_alt"></i></div>
+					<input type="text" class="form-control form-white" placeholder="Name">
+					<input type="text" class="form-control form-white" placeholder="Last Name">
+                    <input type="email" class="form-control form-white" placeholder="Email">
+                    <input type="text" class="form-control form-white" placeholder="Password"  id="password1">
+                    <input type="text" class="form-control form-white" placeholder="Confirm password"  id="password2">
+                    <div id="pass-info" class="clearfix"></div>
+					<div class="checkbox-holder text-left">
+						<div class="checkbox">
+							<input type="checkbox" value="accept_2" id="check_2" name="check_2" />
+							<label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-submit">Register</button>
+				</form>
+			</div>
+		</div>
+	</div>
+<!-- End Register modal -->

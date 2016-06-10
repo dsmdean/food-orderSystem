@@ -1,9 +1,21 @@
+<section class="parallax-window subheader-custom" data-parallax="scroll" data-image-src="images/sub_header_2.jpg" data-natural-width="1400" data-natural-height="470" style="background-image: url('images/sub_header_2.jpg');">
+    <div id="subheader">
+	<div id="sub_content">
+    	<div id="thumb"><img src="images/thumb_restaurant.jpg" alt=""></div>
+                     <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="detail_page_2.html">Read 98 reviews</a></small>)</div>
+                    <h1>{{company.name}}</h1>
+                    <div><em>{{company.categoryId.name}}</em></div>
+                    <div><i class="icon_pin"></i> {{company.adres}} - <strong>Delivery charge:</strong> $10, free over $15.</div>
+    </div><!-- End sub_content -->
+</div><!-- End subheader -->
+</section><!-- End section -->
+
     <div id="position">
         <div class="container">
             <ul>
                 <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="#0">Companies</a></li>
+                <li>{{company.name}}</li>
             </ul>
         </div>
     </div><!-- Position -->
@@ -17,11 +29,9 @@
             	<p><a ui-sref="app.companies" class="btn_side">Back to search</a></p>
 				<div class="box_style_1">
 					<ul id="cat_nav">
-						<li><a href="#starters" class="active">Starters <span>(141)</span></a></li>
-						<li><a href="#main_courses">Main Courses <span>(20)</span></a></li>
-						<li><a href="#beef">Beef <span>(12)</span></a></li>
-						<li><a href="#desserts">Desserts <span>(11)</span></a></li>
-						<li><a href="#drinks">Drinks <span>(20)</span></a></li>
+						<li ng-repeat="dishCategory in company.dishCategories">
+							<a href="#starters" class="">{{dishCategory.name}} <span> (10) </span></a>
+						</li>
 					</ul>
 				</div><!-- End box_style_1 -->
                 
@@ -58,15 +68,15 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr>
+					<tr ng-repeat="dish in dishes">
 						<td>
-							<h5>1. Mexican Enchiladas</h5>
+							<h5>{{dish.name}}</h5>
 							<p>
-								Fuisset mentitum deleniti sit ea.
+								{{dish.description}}
 							</p>
 						</td>
 						<td>
-							<strong>€ 9,40</strong>
+							<strong>{{dish.price}}</strong>
 						</td>
 						<td class="options">
 							<a href="#0"><i class="icon_plus_alt2"></i></a>

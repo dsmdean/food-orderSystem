@@ -12,6 +12,46 @@ angular.module('orderSystemApp')
 
 }])
 
+.factory('companyDishesFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "companies/:id/dishes", {id:"@Id"}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
+.factory('dishesFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "dishes/:id", null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
+.factory('dishesCategoryFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "companies/:id/dish-categories/:detailId", null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
+.factory('categoryFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "company-categories/:id", null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
 .factory('$localStorage', ['$window', function ($window) {
     return {
         store: function (key, value) {
@@ -38,6 +78,7 @@ angular.module('orderSystemApp')
     var TOKEN_KEY = 'Token';
     var isAuthenticated = false;
     var username = '';
+    var userId = '';
     var authToken = undefined;
     
 
@@ -56,6 +97,7 @@ angular.module('orderSystemApp')
   function useCredentials(credentials) {
     isAuthenticated = true;
     username = credentials.username;
+    userId = credentials.id;
     authToken = credentials.token;
  
     // Set the token as header for your requests!
@@ -65,6 +107,7 @@ angular.module('orderSystemApp')
   function destroyUserCredentials() {
     authToken = undefined;
     username = '';
+    userId = '';
     isAuthenticated = false;
     $http.defaults.headers.common['x-access-token'] = authToken;
     $localStorage.remove(TOKEN_KEY);
@@ -75,8 +118,25 @@ angular.module('orderSystemApp')
         $resource(baseURL + "users/login")
         .save(loginData,
            function(response) {
-              storeUserCredentials({username:loginData.username, token: response.token});
-              $rootScope.$broadcast('login:Successful');
+               if(response.user.company) {
+                   $resource("http://localhost:3000/companies/user/" + response.user._id)
+                   .get(
+                       function(secondResponse) {
+                           storeUserCredentials({id: response.user._id, username:loginData.username, token: response.token, companyId: secondResponse._id});
+                           console.log("Succes getting company!");
+                           $rootScope.$broadcast('login:Successful');
+                       },
+                       function(secondResponse) {
+                           console.log("Error getting copany!");
+                       }
+                   );
+               } else {
+                   storeUserCredentials({id: response.user._id, username:loginData.username, token: response.token});
+                   $rootScope.$broadcast('login:Successful');
+               }
+              
+            //   userId = response.user;
+              
            },
            function(response){
               isAuthenticated = false;
@@ -137,6 +197,10 @@ angular.module('orderSystemApp')
     
     authFac.getUsername = function() {
         return username;  
+    };
+    
+    authFac.getUserId = function() {
+        return userId;  
     };
 
     loadUserCredentials();

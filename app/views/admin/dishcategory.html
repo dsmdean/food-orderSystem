@@ -11,32 +11,29 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <button type="button" ui-sref="app.admin-product-add" class="btn btn-info btn-fill pull-right">Add Product</button>
-                                <h4 class="title">All Products in the System</h4>
+                                <button type="button" ui-sref="app.admin-dishcategory-add" class="btn btn-info btn-fill pull-right">Add Category</button>
+                                <h4 class="title">Dish Categories</h4>
                                 <p class="category">Here is a subtitle for this table</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>ID</th>
-                                    	<th>Name</th>
-                                    	<th>Description</th>
-                                    	<th>Price</th>
-                                    	<th>Stock</th>
+                                        <th>Name</th>
+                                    	<th>Created</th>
+                                    	<th>Updated</th>
                                         <th>Actions</th>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="product in products">
-                                        	<td>{{$index + 1}}</td>
-                                        	<td>{{product.name}}</td>
-                                        	<td>{{product.description}}</td>
-                                        	<td>{{product.price}}</td>
-                                        	<td>{{product.stock}}</td>
-                                            <td><a ui-sref="app.admin-product-details({id: product._id})" class="btn btn-primary" type="button">Edit</a> &nbsp; <button class="btn btn-danger" ng-click="deleteProduct(product._id)" type="button">Delete</button></td>
+                                        <tr ng-repeat="category in categories">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{category.name}}</td>
+                                        	<td>{{category.createdAt}}</td>
+                                        	<td>{{category.updatedAt}}</td>
+                                            <td><a ui-sref="app.admin-dishcategory-details({id: category._id})" class="btn btn-primary" type="button">Edit</a> &nbsp; <button class="btn btn-danger" ng-click="deleteCategory(category._id)" type="button">Delete</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
