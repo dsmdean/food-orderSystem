@@ -8,7 +8,7 @@
  * Controller of the orderSystemApp
  */
 angular.module('orderSystemApp')
-    .controller('ProductsCtrl', ['$scope', 'companyDishesFactory', '$state', '$stateParams', '$localStorage', function ($scope, companyDishesFactory, $state, $stateParams, $localStorage) {
+    .controller('ProductsCtrl', ['$scope', 'companyDishesFactory', 'dishesFactory', '$state', '$stateParams', '$localStorage', function ($scope, companyDishesFactory, dishesFactory, $state, $stateParams, $localStorage) {
         $scope.localstorage = $localStorage.getObject('Token','{}');
         
         companyDishesFactory.query({

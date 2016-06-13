@@ -25,9 +25,10 @@
                     <li class="submenu" ng-if="loggedIn">
                         <a href="javascript:void(0);" class="show-submenu">User<i class="icon-down-open-mini"></i></a>
                         <ul>
-                            <li><a ui-sref="app.profile">{{user.firstname}} {{user.lastname}}</a></li>
-                            <li><a ui-sref="app.favorites">Favorites</a></li>
-                            <li ng-if="company"><a ui-sref="app.admin-dashboard-">Admin Panel</a></li>
+                            <li ng-if="!company"><a ui-sref="app.profile">{{user.firstname}} {{user.lastname}}</a></li>
+                            <li ng-if="company"><a ui-sref="app.company-menu({id: companyD._id})">{{companyD.name}}</a></li>
+                            <li ng-if="!company"><a ui-sref="app.favorites">Favorites</a></li>
+                            <li ng-if="company"><a ui-sref="app.admin-dashboard">Admin Panel</a></li>
                         </ul>
                     </li>
                     <li ng-if="!loggedIn"><a href="" data-toggle="modal" data-target="#login_2">Login</a></li>

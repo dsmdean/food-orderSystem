@@ -19,7 +19,7 @@ angular
         views: {
           'header': {
             templateUrl : 'views/front/header.html',
-            controller  : 'LoginCtrl'
+            controller  : 'HeaderCtrl'
           },
           'subheader': {
             templateUrl : 'views/front/subheader.html',
