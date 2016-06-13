@@ -8,8 +8,18 @@
  * Controller of the orderSystemApp
  */
 angular.module('orderSystemApp')
-    .controller('CategoryCtrl', ['$scope', 'categoryFactory', '$state', function ($scope, categoryFactory, $state) {
-
+    .controller('CategoryCtrl', ['$scope', 'categoryFactory', 'AuthFactory', '$state', '$localStorage', function ($scope, categoryFactory, AuthFactory, $state, $localStorage) {
+        
+        // if(AuthFactory.isAuthenticated()) {
+        //     $scope.localstorage = $localStorage.getObject('Token','{}');
+            
+        //     if(!('companyId' in $scope.localstorage)) {
+        //         $state.go('app', {}, {reload: true});
+        //     }
+        // } else {
+        //     $state.go('app.admin-dashboard', {}, {reload: true});
+        // }
+        
         categoryFactory.query(
             function (response) {
                 $scope.categories = response;

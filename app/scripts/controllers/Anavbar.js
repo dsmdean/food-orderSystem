@@ -21,6 +21,14 @@ angular.module('orderSystemApp')
             $scope.loggedIn = true;
             $scope.username = AuthFactory.getUsername();
             $scope.userId = AuthFactory.getUserId();
+            
+            $scope.localstorage = $localStorage.getObject('Token','{}');
+            
+            if(!('companyId' in $scope.localstorage)) {
+                $state.go('app', {}, {reload: true});
+            }
+        } else {
+            $state.go('app.admin-dashboard', {}, {reload: true});
         }
         
         $scope.company = companyFactory.get({

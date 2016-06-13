@@ -9,6 +9,7 @@
  */
 angular.module('orderSystemApp')
     .controller('CategoryAddCtrl', ['$scope', 'categoryFactory', '$state', function ($scope, categoryFactory, $state) {
+        
         $scope.cName = {
             name: ""
         };
