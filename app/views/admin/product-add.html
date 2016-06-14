@@ -20,13 +20,9 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Image</label>
-                                                <input type="text" class="form-control" ng-model="product.image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Company</label>
-                                                <input type="text" class="form-control" ng-model="product.companyId">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <span class="btn btn-default btn-file"><span>Choose file</span><input type="file" ng-model="product.image"/></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -84,6 +80,7 @@
 
                                       <h4 class="title">{{product.name}}<br />
                                          <small>{{dishCategory.name}}</small>
+                                         <small>{{product.image}}</small>
                                       </h4>
                                     </a>
                                 </div>

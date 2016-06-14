@@ -8,13 +8,9 @@
  * Controller of the orderSystemApp
  */
 angular.module('orderSystemApp')
-    .controller('ProductsCtrl', ['$scope', 'companyDishesFactory', 'dishesFactory', '$state', '$stateParams', '$localStorage', function ($scope, companyDishesFactory, dishesFactory, $state, $stateParams, $localStorage) {
-        $scope.localstorage = $localStorage.getObject('Token','{}');
+    .controller('ProductsCtrl', ['$scope', 'dishesFactory', '$state', '$stateParams', '$localStorage', function ($scope, dishesFactory, $state, $stateParams, $localStorage) {
         
-        companyDishesFactory.query({
-            id: $scope.localstorage.companyId
-        })
-        .$promise.then(
+        dishesFactory.query(
             function (response) {
                 $scope.products = response;
 
@@ -24,9 +20,4 @@ angular.module('orderSystemApp')
             }
         );
         
-        $scope.deleteProduct = function(productId) {
-            console.log('Delete category', productId);
-            dishesFactory.delete({id: productId});
-            $state.go($state.current, {}, {reload: true});
-        };
     }]);

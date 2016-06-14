@@ -336,7 +336,7 @@ angular
         views: {
           'content@': {
             templateUrl : 'views/admin/products.html',
-            controller  : 'ProductsCtrl'              
+            controller  : 'AProductsCtrl'              
           },
           'Anavbar@app.admin-products': {
             templateUrl : 'views/admin/Anavbar.html',
