@@ -22,6 +22,26 @@ angular.module('orderSystemApp')
 
 }])
 
+.factory('companyOrdersFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "companies/:id/orders", {id:"@Id"}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
+.factory('ordersFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "orders/:id", {id:"@Id"}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
 .factory('dishesFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
         return $resource(baseURL + "dishes/:id", null, {
@@ -140,6 +160,9 @@ angular.module('orderSystemApp')
                            console.log("Error getting copany!");
                        }
                    );
+               } else if(response.user.admin) {
+                   storeUserCredentials({id: response.user._id, username:loginData.username, token: response.token, admin:response.user.admin});
+                   $rootScope.$broadcast('login:Successful');
                } else {
                    storeUserCredentials({id: response.user._id, username:loginData.username, token: response.token});
                    $rootScope.$broadcast('login:Successful');

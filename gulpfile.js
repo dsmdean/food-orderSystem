@@ -18,8 +18,8 @@ var gulp = require('gulp'),
 
 gulp.task('jshint', function() {
   return gulp.src('app/scripts/**/*.js')
-  .pipe(jshint())
-  .pipe(jshint.reporter(stylish));
+  .pipe(jshint());
+  // .pipe(jshint.reporter(stylish));
 });
 
 gulp.task('usemin',['jshint'], function () {

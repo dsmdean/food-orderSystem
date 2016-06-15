@@ -36,8 +36,7 @@ angular.module('orderSystemApp')
             
             $scope.localstorage = $localStorage.getObject('Token','{}');
             
-            if(!('companyId' in $scope.localstorage)) {
-                console.log("It's not a company!");
+            if(!('companyId' in $scope.localstorage) && !('admin' in $scope.localstorage)) {
                 $state.go('app');
             }
             

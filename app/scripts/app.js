@@ -404,7 +404,8 @@ angular
         parent: 'app.admin-dashboard',
         views: {
           'content@': {
-            templateUrl : 'views/admin/profile.html'              
+            templateUrl : 'views/admin/profile.html',
+            controller  : 'AProfileCtrl'              
           },
           'Anavbar@app.admin-profile': {
             templateUrl : 'views/admin/Anavbar.html',
@@ -426,7 +427,8 @@ angular
         parent: 'app.admin-dashboard',
         views: {
           'content@': {
-            templateUrl : 'views/admin/orders.html'              
+            templateUrl : 'views/admin/orders.html',
+            controller  : 'AOrdersCtrl'              
           },
           'Anavbar@app.admin-orders': {
             templateUrl : 'views/admin/Anavbar.html',
@@ -441,24 +443,48 @@ angular
           }
         }
       })
-      
-      // route for the order details page
-      .state('app.admin-order-details', {
-        url:'/order-details',
+
+      // route for the orders page
+      .state('app.admin-users', {
+        url:'/users',
         parent: 'app.admin-dashboard',
         views: {
           'content@': {
-            templateUrl : 'views/admin/order-details.html'              
+            templateUrl : 'views/admin/users.html',
+            controller  : 'AUsersCtrl'              
           },
-          'Anavbar@app.admin-order-details': {
+          'Anavbar@app.admin-users': {
             templateUrl : 'views/admin/Anavbar.html',
             controller  : 'ANavbarCtrl'                       
           },
-          'Asidebar@app.admin-order-details': {
+          'Asidebar@app.admin-users': {
             templateUrl : 'views/admin/Asidebar.html',
             controller  : 'ASidebarCtrl'                       
           },
-          'Afooter@app.admin-order-details': {
+          'Afooter@app.admin-users': {
+            templateUrl : 'views/admin/Afooter.html'              
+          }
+        }
+      })
+
+      // route for the orders page
+      .state('app.admin-companies', {
+        url:'/companies',
+        parent: 'app.admin-dashboard',
+        views: {
+          'content@': {
+            templateUrl : 'views/admin/companies.html',
+            controller  : 'ACompaniesCtrl'              
+          },
+          'Anavbar@app.admin-companies': {
+            templateUrl : 'views/admin/Anavbar.html',
+            controller  : 'ANavbarCtrl'                       
+          },
+          'Asidebar@app.admin-companies': {
+            templateUrl : 'views/admin/Asidebar.html',
+            controller  : 'ASidebarCtrl'                       
+          },
+          'Afooter@app.admin-companies': {
             templateUrl : 'views/admin/Afooter.html'              
           }
         }

@@ -28,8 +28,8 @@
                                         <tr ng-repeat="category in categories">
                                             <td>{{$index + 1}}</td>
                                             <td>{{category.name}}</td>
-                                        	<td>{{category.createdAt}}</td>
-                                        	<td>{{category.updatedAt}}</td>
+                                        	<td>{{category.createdAt | date:'MMM. dd, yyyy'}}</td>
+                                        	<td>{{category.updatedAt | date:'MMM. dd, yyyy'}}</td>
                                             <td><a ui-sref="app.admin-category-details({id: category._id})" class="btn btn-primary" type="button">Edit</a> &nbsp; <button class="btn btn-danger" ng-click="deleteCategory(category._id)" type="button">Delete</button></td>
                                         </tr>
                                     </tbody>

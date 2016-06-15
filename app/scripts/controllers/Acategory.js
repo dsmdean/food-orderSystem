@@ -19,6 +19,12 @@ angular.module('orderSystemApp')
         // } else {
         //     $state.go('app.admin-dashboard', {}, {reload: true});
         // }
+
+        $scope.localstorage = $localStorage.getObject('Token','{}');
+
+        if(!('admin' in $scope.localstorage)) {
+            $state.go('app.admin-dashboard', {}, {reload: true});
+        }
         
         categoryFactory.query(
             function (response) {

@@ -8,7 +8,13 @@
  * Controller of the orderSystemApp
  */
 angular.module('orderSystemApp')
-    .controller('CategoryDetailsCtrl', ['$scope', 'categoryFactory', '$stateParams', '$state', function ($scope, categoryFactory, $stateParams, $state) {
+    .controller('CategoryDetailsCtrl', ['$scope', 'categoryFactory', '$stateParams', '$state', '$localStorage', function ($scope, categoryFactory, $stateParams, $state, $localStorage) {
+        $scope.localstorage = $localStorage.getObject('Token','{}');
+
+        if(!('admin' in $scope.localstorage)) {
+            $state.go('app.admin-dashboard', {}, {reload: true});
+        }
+        
         $scope.categoryName = {
             name: ""
         };

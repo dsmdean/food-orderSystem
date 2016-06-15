@@ -11,7 +11,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <button type="button" ui-sref="app.admin-product-add" class="btn btn-info btn-fill pull-right">Add Product</button>
+                                <button type="button" ng-if="companyB" ui-sref="app.admin-product-add" class="btn btn-info btn-fill pull-right">Add Product</button>
                                 <h4 class="title">All Products in the System</h4>
                                 <p class="category">Here is a subtitle for this table</p>
                             </div>
@@ -29,10 +29,10 @@
                                         <tr ng-repeat="product in products">
                                         	<td>{{$index + 1}}</td>
                                         	<td>{{product.name}}</td>
-                                        	<td>{{product.description}}</td>
+                                        	<td>{{product.description | limitTo:100}}...</td>
                                         	<td>{{product.price}}</td>
                                         	<td>{{product.stock}}</td>
-                                            <td><a ui-sref="app.admin-product-details({id: product._id})" class="btn btn-primary" type="button">Edit</a> &nbsp; <button class="btn btn-danger" ng-click="deleteProduct(product._id)" type="button">Delete</button></td>
+                                            <td><a ui-sref="app.admin-product-details({id: product._id})" class="btn btn-primary" type="button"><span ng-if="companyB">Edit</span><span ng-if="adminB">View</span></a> &nbsp; <button ng-if="companyB" class="btn btn-danger" ng-click="deleteProduct(product._id)" type="button">Delete</button></td>
                                         </tr>
                                     </tbody>
                                 </table>

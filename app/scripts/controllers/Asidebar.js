@@ -8,10 +8,17 @@
  * Controller of the orderSystemApp
  */
 angular.module('orderSystemApp')
-    .controller('ASidebarCtrl', ['$scope', '$state', function ($scope, $state) {
-        
+    .controller('ASidebarCtrl', ['$scope', '$state', '$localStorage', function ($scope, $state, $localStorage) {
+        $scope.admin = false;
+
         $scope.stateis = function(curstate) {
             return $state.is(curstate);  
         };
+
+        $scope.localstorage = $localStorage.getObject('Token','{}');
+
+        if('admin' in $scope.localstorage) {
+            $scope.admin = true;
+        }
         
     }]);
