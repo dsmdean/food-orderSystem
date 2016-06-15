@@ -120,10 +120,11 @@ angular
       
       // route for the companies profile page
       .state('app.company-profile', {
-        url:'company-profile',
+        url:'company-profile/:id',
         views: {
           'content@': {
-            templateUrl : 'views/front/company-profile.html'                 
+            templateUrl : 'views/front/company-profile.html',
+            controller  : 'CompaniesMenuCtrl'                 
           }
         }
       })

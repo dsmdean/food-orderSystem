@@ -14,6 +14,7 @@
                                 <h4 class="title">Profile</h4>
                             </div>
                             <div class="content">
+                                <form>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -32,29 +33,21 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control" disabled value="{{company.adres}}">
+                                                <label for="exampleInputEmail1">Address</label>
+                                                <input type="email" class="form-control" disabled value="{{company.adres}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Phone</label>
-                                                <input type="text" class="form-control" disabled value="{{company.phone}}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Description</label>
-                                                <textarea rows="5" class="form-control" disabled>{{company.description}}</textarea>
+                                                <label>Image</label>
+                                                <input type="text" class="form-control" value="{{company.image}}">
                                             </div>
                                         </div>
                                     </div>
 
                                     <button type="submit" class="btn btn-info btn-fill pull-right">Edit Profile</button>
                                     <div class="clearfix"></div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -73,7 +66,7 @@
                                       </h4>
                                     </a>
                                 </div>
-                                <p class="description text-center"> {{company.description}}
+                                <p class="description text-center"> {{company.adres}}
                                 </p>
                             </div>
                             <hr>

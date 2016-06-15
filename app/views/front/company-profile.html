@@ -1,9 +1,21 @@
+<section class="parallax-window subheader-custom" data-parallax="scroll" data-image-src="images/sub_header_2.jpg" data-natural-width="1400" data-natural-height="470" style="background-image: url('images/sub_header_2.jpg');">
+    <div id="subheader">
+	<div id="sub_content">
+    	<div id="thumb"><img src="images/thumb_restaurant.jpg" alt=""></div>
+                     <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="detail_page_2.html">Read 98 reviews</a></small>)</div>
+                    <h1>{{company.name}}</h1>
+                    <div><em>{{company.categoryId.name}}</em></div>
+                    <div><i class="icon_pin"></i> {{company.adres}} - <strong>Delivery charge:</strong> $10, free over $15.</div>
+    </div><!-- End sub_content -->
+</div><!-- End subheader -->
+</section><!-- End section -->
+
     <div id="position">
         <div class="container">
             <ul>
                 <li><a href="#0">Home</a></li>
-                <li><a href="#0">Category</a></li>
-                <li>Page active</li>
+                <li><a href="#0">Companies</a></li>
+                <li>{{company.name}}</li>
             </ul>
         </div>
     </div><!-- Position -->
@@ -35,11 +47,11 @@
 				<div class="box_style_2 hidden-xs" id="help">
 					<i class="icon_lifesaver"></i>
 					<h4>Need <span>Help?</span></h4>
-					<a href="tel://004542344599" class="phone">+45 423 445 99</a>
+					<a href="tel://{{company.phone}}" class="phone">{{company.phone}}</a>
 					<small>Monday to Friday 9.00am - 7.30pm</small>
                     
                     <hr class="styled">
-                    <a ui-sref="app.company-menu" class="btn_1 add_bottom_15">View Menu</a>
+                    <a ui-sref="app.company-menu({id: company._id})" class="btn_1 add_bottom_15">View Menu</a>
 				</div>
 			</div>
             
@@ -49,10 +61,7 @@
 
                     <h3>About us</h3>
 					<p>
-						Lorem ipsum dolor sit amet, ius sonet meliore partiendo cu. Nobis laudem mediocrem cum et. Debitis nonumes similique te eam, blandit eligendi principes sea no. Cu eum quidam expetendis.
-					</p>
-					<p class="add_bottom_30">
-						Lorem ipsum dolor sit amet, ex has recusabo adipiscing, aliquip alienum at vis, eos id qualisque quaerendum. Soleat habemus duo no, te quo dicam everti, sale ullum movet per ea. Cu cum laudem quaeque, agam decore nullam ei vis. Nec ad tota etiam eirmod. Harum debitis detraxit ut vel, eu vel option oporteat.
+						{{company.description}}
 					</p>
 					<div id="summary_review">
 						<div id="general_rating">

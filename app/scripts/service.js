@@ -22,6 +22,16 @@ angular.module('orderSystemApp')
 
 }])
 
+.factory('companyCategoryDishesFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "companies/:id/dishes/:categoryId", {id:"@Id"}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
 .factory('companyOrdersFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
         return $resource(baseURL + "companies/:id/orders", {id:"@Id"}, {

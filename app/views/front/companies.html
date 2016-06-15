@@ -95,7 +95,7 @@
 					<div class="col-md-9 col-sm-9">
 						<div class="desc">
 							<div class="thumb_strip">
-								<a ui-sref="app.company-profile"><img src="images/thumb_restaurant.jpg" alt=""></a>
+								<a ui-sref="app.company-profile({id: company._id})"><img src="images/thumb_restaurant.jpg" alt=""></a>
 							</div>
 							<div class="rating">
 								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">98 reviews</a></small>)
@@ -105,11 +105,11 @@
 								{{company.categoryId.name}}
 							</div>
 							<div class="location">
-								{{company.adres}} <span class="opening">Opens at 17:00.</span> Minimum order: $15
+								{{company.adres}}
 							</div>
 							<ul>
-								<li>Take away<i class="icon_check_alt2 ok"></i></li>
-								<li>Delivery<i class="icon_check_alt2 no"></i></li>
+								<li>Take away<i class="icon_check_alt2" ng-class="{{company.takeout}} ? 'ok' : 'no'"></i></li>
+								<li>Delivery<i class="icon_check_alt2" ng-class="{{company.delivery}} ? 'ok' : 'no'"></i></li>
 							</ul>
 						</div>
 					</div>
