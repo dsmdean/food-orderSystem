@@ -29,8 +29,11 @@
             	<p><a ui-sref="app.companies" class="btn_side">Back to search</a></p>
 				<div class="box_style_1">
 					<ul id="cat_nav">
+						<li>
+							<a href="" ng-click="select('')" ng-class="{active:selected('')}">All</a>
+						</li>
 						<li ng-repeat="dishCategory in company.dishCategories">
-							<a href="" ng-click="select(dishCategory._id)" ng-class="{active:selected(dishCategory._id)}">{{dishCategory.name}} <span> (10) </span></a>
+							<a href="" ng-click="select(dishCategory._id)" ng-class="{active:selected(dishCategory._id)}">{{dishCategory.name}}</a>
 						</li>
 					</ul>
 				</div><!-- End box_style_1 -->
@@ -39,7 +42,6 @@
 					<i class="icon_lifesaver"></i>
 					<h4>Need <span>Help?</span></h4>
 					<a href="tel://{{company.phone}}" class="phone">{{company.phone}}</a>
-					<small>Monday to Friday 9.00am - 7.30pm</small>
                     
                     <hr class="styled">
                     <a ui-sref="app.company-profile({id: company._id})" class="btn_1 add_bottom_15">View Profile</a>
