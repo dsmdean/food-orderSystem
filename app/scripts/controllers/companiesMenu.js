@@ -8,10 +8,11 @@
  * Controller of the orderSystemApp
  */
 angular.module('orderSystemApp')
-    .controller('CompaniesMenuCtrl', ['$scope', 'companyFactory', 'companyCategoryDishesFactory', 'dishesCategoryFactory', '$state', '$stateParams', function ($scope, companyFactory, companyCategoryDishesFactory, dishesCategoryFactory, $state, $stateParams) {
+    .controller('CompaniesMenuCtrl', ['$scope', '$rootScope', 'AuthFactory', 'companyFactory', 'companyCategoryDishesFactory', 'dishesCategoryFactory', '$state', '$stateParams', 'ngDialog', function ($scope, $rootScope, AuthFactory, companyFactory, companyCategoryDishesFactory, dishesCategoryFactory, $state, $stateParams, ngDialog) {
         $scope.tabId = '';
         $scope.dishcategory = '';
         $scope.overallR = 0;
+        $scope.loggedIn = false;
 
         $scope.company = companyFactory.get({
             id: $stateParams.id
@@ -19,12 +20,8 @@ angular.module('orderSystemApp')
         .$promise.then(
             function (response) {
                 $scope.company = response;
-                // if($scope.tabId == '') {
-                //     $scope.tabId = response.dishCategories[0]._id;
-                // }
-
+                
                 $scope.getDishes();
-                $scope.getDishCategory();
                 $scope.overallRating(response.comments);
             },
             function (response) {
@@ -107,7 +104,18 @@ angular.module('orderSystemApp')
         $scope.overallRating = function (comments) {
             for (i = 0; i < comments.length; i++) { 
                 $scope.overallR += comments[i].rating;
-                console.log($scope.overallR);
             }
         };
+
+        $scope.openComment = function () {
+            ngDialog.open({ template: 'views/front/comment.html', scope: $scope, className: 'ngdialog-theme-plain', controller:"CommentCtrl" });
+        };
+
+        if(AuthFactory.isAuthenticated()) {
+            $scope.loggedIn = true;
+        }
+
+        $rootScope.$on('login:Successful', function () {
+            $scope.loggedIn = AuthFactory.isAuthenticated();
+        });
     }]);

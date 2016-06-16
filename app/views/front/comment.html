@@ -1,0 +1,47 @@
+    <div class="ngdialog-message">
+        <div class="">
+            <h3>LEAVE A REVIEW</h3>
+        </div>
+        <div class="">&nbsp;</div>
+        <div class="">
+            <form ng-submit="postComment()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" disabled placeholder="{{user.username}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" disabled placeholder="{{user.firstname}} {{user.lastname}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select class="form-control" name="food_review" required ng-model="comment.rating">
+								<option value="">Rating</option>
+								<option value="1">Low</option>
+								<option value="2">Sufficient</option>
+								<option value="3">Good</option>
+								<option value="4">Excellent</option>
+								<option value="5">Super</option>
+							</select> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <textarea name="review_text" id="review_text" required class="form-control" style="height:100px" placeholder="Write your review" ng-model="comment.comment"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info btn-sm">Submit</button>
+            </form>
+        </div>
+        <div>
+
+        </div>
+    </div>

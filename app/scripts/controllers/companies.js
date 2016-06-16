@@ -8,19 +8,8 @@
  * Controller of the orderSystemApp
  */
 angular.module('orderSystemApp')
-    .controller('CompaniesCtrl', ['$scope', 'companyFactory', 'categoryFactory', function ($scope, companyFactory, categoryFactory) {
-        $scope.tabId = '';
+    .controller('CompaniesCtrl', ['$scope', 'companyFactory', 'categoryFactory', 'companyCategoryFactory', function ($scope, companyFactory, categoryFactory, companyCategoryFactory) {
         $scope.categoryId = '';
-
-        companyFactory.query(
-            function (response) {
-                $scope.companies = response;
-
-            },
-            function (response) {
-                $scope.message = "Error: " + response.status + " " + response.statusText;
-            }
-        );
 
         categoryFactory.query(
             function (response) {
@@ -31,17 +20,37 @@ angular.module('orderSystemApp')
             }
         );
 
-        $scope.select = function (setTab) {
-            $scope.tabId = setTab;
-            $scope.getDishes();
-            $scope.getDishCategory();
-        };
+        $scope.getData = function () {
+            if($scope.categoryId == '') {
+                companyFactory.query(
+                    function (response) {
+                        $scope.companies = response;
 
-        $scope.selected = function (setTab) {
-            if(setTab == $scope.tabId) {
-                return true;
+                    },
+                    function (response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
             } else {
-                return false;
+                companyCategoryFactory.query({
+                    id: $scope.categoryId
+                })
+                .$promise.then(
+                    function (response) {
+                        $scope.companies = response;
+                    },
+                    function (response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
             }
         };
+
+        $scope.select = function (setCat) {
+            $scope.categoryId = setCat;
+            $scope.getData();
+        };
+
+        $scope.getData();
+ 
     }]);

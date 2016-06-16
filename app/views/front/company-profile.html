@@ -123,7 +123,7 @@
 							</div>
 						</div>
 						<hr class="styled">
-						<a href="#" class="btn_1 add_bottom_15" data-toggle="modal" data-target="#myReview">Leave a review</a>
+						<a ng-if="loggedIn" href="" ng-click="openComment()" class="btn_1 add_bottom_15">Leave a review</a>
 					</div><!-- End summary_review -->
                     
 					<div class="review_strip_single" ng-repeat="comment in company.comments">

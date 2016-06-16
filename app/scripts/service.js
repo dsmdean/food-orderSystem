@@ -22,9 +22,29 @@ angular.module('orderSystemApp')
 
 }])
 
+.factory('companyCategoryFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "companies?categoryId=:id", {id:"@Id"}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
 .factory('companyCategoryDishesFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
         return $resource(baseURL + "companies/:id/dishes/:categoryId", {id:"@Id"}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
+.factory('companyCommentFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "companies/:id/comments/:commentId", {id:"@Id"}, {
             'update': {
                 method: 'PUT'
             }
