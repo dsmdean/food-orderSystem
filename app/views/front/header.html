@@ -35,10 +35,9 @@
                         <ul>
                             <li ng-if="!company"><a ui-sref="app.profile">{{user.firstname}} {{user.lastname}}</a></li>
                             <li ng-if="company"><a ui-sref="app.company-menu({id: companyD._id})">{{companyD.name}}</a></li>
-                            <li ng-if="!company"><a ui-sref="app.favorites">Favorites</a></li>
-                            <li ng-if="!company"><a ui-sref="app.orders">Orders</a></li>
-                            <li ng-if="company"><a ui-sref="app.admin-dashboard">Admin Panel</a></li>
-                            <li ng-if="admin"><a ui-sref="app.admin-dashboard">Admin Panel</a></li>
+                            <li ng-if="!company && !admin"><a ui-sref="app.favorites">Favorites</a></li>
+                            <li ng-if="!company && !admin"><a ui-sref="app.orders">Orders</a></li>
+                            <li ng-if="company || admin"><a ui-sref="app.admin-dashboard">Admin Panel</a></li>
                         </ul>
                     </li>
                     <li ng-if="!loggedIn"><a href="" ng-click="doLogin()">Login</a></li>

@@ -99,6 +99,20 @@ angular.module('orderSystemApp')
                         $scope.message = "Error: " + response.status + " " + response.statusText;
                     }
                 );
+            } else if('admin' in $scope.localstorage) {
+                $scope.admin = true;
+
+                $scope.user = userFactory.get({
+                    id: $scope.localstorage.id
+                })
+                .$promise.then(
+                    function (response) {
+                        $scope.user = response;
+                    },
+                    function (response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
             } else {
                 $scope.user = userFactory.get({
                     id: $scope.localstorage.id
