@@ -1,11 +1,9 @@
-<section class="parallax-window subheader-custom" data-parallax="scroll" data-image-src="images/sub_header_2.jpg" data-natural-width="1400" data-natural-height="470" style="background-image: url('images/sub_header_2.jpg');">
+<section class="parallax-window subheader-custom" id="short" data-parallax="scroll" data-image-src="images/sub_header_short.jpg" data-natural-width="1400" data-natural-height="350" style="background-image: url('images/sub_header_short.jpg');">
     <div id="subheader">
 	<div id="sub_content">
-    	<div id="thumb"><img src="images/thumb_restaurant.jpg" alt=""></div>
-                     <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="detail_page_2.html">Read 98 reviews</a></small>)</div>
-                    <h1>{{company.name}}</h1>
-                    <div><em>{{company.categoryId.name}}</em></div>
-                    <div><i class="icon_pin"></i> {{company.adres}} - <strong>Delivery charge:</strong> $10, free over $15.</div>
+    	<h1>{{company.name}}</h1>
+		<div><em>{{company.categoryId.name}}</em></div>
+		<div><i class="icon_pin"></i> {{company.adres}}</div>
     </div><!-- End sub_content -->
 </div><!-- End subheader -->
 </section><!-- End section -->
@@ -13,8 +11,8 @@
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="#0">Home</a></li>
-                <li><a href="#0">Companies</a></li>
+                <li><a href="" ui-sref="app">Home</a></li>
+                <li><a href="" ui-sref="app.companies">Companies</a></li>
                 <li>{{company.name}}</li>
             </ul>
         </div>
@@ -26,7 +24,9 @@
 		<div class="row">
         
 			<div class="col-md-3">
-            	<p><a ui-sref="app.companies" class="btn_side">Back to search</a></p>
+            	<p ng-if="loggedIn">
+					<a href="" ng-click="addFavorite(company._id)" class="btn_side">Add to favorites</a>
+				</p>
 				<div class="box_style_1">
 					<ul id="cat_nav">
 						<li>
@@ -78,10 +78,10 @@
 							</p>
 						</td>
 						<td>
-							<strong>{{dish.price}}</strong>
+							<strong>{{dish.price/100 | currency}}</strong>
 						</td>
 						<td class="options">
-							<a href="#0"><i class="icon_plus_alt2"></i></a>
+							<a href=""><i class="icon_plus_alt2"></i></a>
 						</td>
 					</tr>
 					</tbody>

@@ -66,22 +66,23 @@ angular
       })
       
       // route for the products page
-      .state('app.products', {
-        url:'products',
-        views: {
-          'content@': {
-            templateUrl : 'views/front/products.html',
-            controller  : 'ProductsCtrl'                 
-          }
-        }
-      })
+      // .state('app.products', {
+      //   url:'products',
+      //   views: {
+      //     'content@': {
+      //       templateUrl : 'views/front/products.html',
+      //       controller  : 'ProductsCtrl'                 
+      //     }
+      //   }
+      // })
       
       // route for the favorites page
       .state('app.favorites', {
         url:'favorites',
         views: {
           'content@': {
-            templateUrl : 'views/front/favorites.html'                 
+            templateUrl : 'views/front/favorites.html',
+            controller  : 'FavoritesCtrl'                 
           }
         }
       })
@@ -91,7 +92,19 @@ angular
         url:'profile',
         views: {
           'content@': {
-            templateUrl : 'views/front/profile.html'                 
+            templateUrl : 'views/front/profile.html',
+            controller  : 'ProfileCtrl'                 
+          }
+        }
+      })
+
+      // route for the profile-edit page
+      .state('app.profile-edit', {
+        url:'profile-edit',
+        views: {
+          'content@': {
+            templateUrl : 'views/front/profile-edit.html',
+            controller  : 'ProfileEditCtrl'                 
           }
         }
       })
@@ -128,13 +141,14 @@ angular
           }
         }
       })
-      
-      // route for the order details page
-      .state('app.order-details', {
-        url:'order-details',
+
+      // route for the orders page
+      .state('app.orders', {
+        url:'orders',
         views: {
           'content@': {
-            templateUrl : 'views/front/order-details.html'                 
+            templateUrl : 'views/front/orders.html',
+            controller  : 'OrdersCtrl'                 
           }
         }
       })
@@ -355,7 +369,7 @@ angular
       
       // route for the add product page
       .state('app.admin-product-add', {
-        url:'/product-details/add',
+        url:'/product/add',
         parent: 'app.admin-dashboard',
         views: {
           'content@': {
@@ -445,7 +459,7 @@ angular
         }
       })
 
-      // route for the orders page
+      // route for the users page
       .state('app.admin-users', {
         url:'/users',
         parent: 'app.admin-dashboard',
@@ -468,7 +482,7 @@ angular
         }
       })
 
-      // route for the orders page
+      // route for the companies page
       .state('app.admin-companies', {
         url:'/companies',
         parent: 'app.admin-dashboard',

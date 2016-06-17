@@ -16,14 +16,16 @@ angular.module('orderSystemApp')
         $scope.user = '';
         $scope.company = false;
         $scope.companyD = '';
+        $scope.admin = false;
         
         $scope.loginData = $localStorage.getObject('userinfo','{}');
         
         $scope.doLogin = function() {
-            if($scope.rememberMe)
-            $localStorage.storeObject('userinfo',$scope.loginData);
+            ngDialog.open({ template: 'views/front/login.html', scope: $scope, className: 'ngdialog-theme-plain', controller:"LoginCtrl" });
+            // if($scope.rememberMe)
+            // $localStorage.storeObject('userinfo',$scope.loginData);
 
-            AuthFactory.login($scope.loginData);
+            // AuthFactory.login($scope.loginData);
         };
         
         if(AuthFactory.isAuthenticated()) {
@@ -42,6 +44,20 @@ angular.module('orderSystemApp')
                 .$promise.then(
                     function (response) {
                         $scope.companyD = response;
+                    },
+                    function (response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
+            } else if('admin' in $scope.localstorage) {
+                $scope.admin = true;
+
+                $scope.user = userFactory.get({
+                    id: $scope.localstorage.id
+                })
+                .$promise.then(
+                    function (response) {
+                        $scope.user = response;
                     },
                     function (response) {
                         $scope.message = "Error: " + response.status + " " + response.statusText;
@@ -106,5 +122,7 @@ angular.module('orderSystemApp')
             $scope.user = '';
             $scope.company = false;
             $scope.companyD = '';
+
+            $state.go('app', {}, {reload: true});
         };
     }]);

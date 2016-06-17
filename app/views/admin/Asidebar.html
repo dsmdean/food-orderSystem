@@ -57,12 +57,13 @@
                         <p>Orders</p>
                     </a>
                 </li>
-                <li ng-class="{active: stateis('app.admin-profile')}">
+                <li ng-hide="admin" ng-class="{active: stateis('app.admin-profile')}">
                     <a ui-sref="app.admin-profile">
                         <i class="pe-7s-user"></i>
                         <p>Profile</p>
                     </a>
                 </li>
+                <!--
                 <li>
                     <a href="maps.html">
                         <i class="pe-7s-map-marker"></i>
@@ -75,6 +76,7 @@
                         <p>Notifications</p>
                     </a>
                 </li>
+                -->
             </ul>
     	</div>
     </div>

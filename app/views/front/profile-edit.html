@@ -10,9 +10,9 @@
     <div id="position">
         <div class="container">
             <ul>
-                <li><a href="" ui-sref="app">Home</a></li>
-				<li>User</li>
-                <li>Profile</li>
+                <li><a href="#0">Home</a></li>
+                <li><a href="#0">Category</a></li>
+                <li>Page active</li>
             </ul>
         </div>
     </div><!-- Position -->
@@ -51,21 +51,41 @@
 						<div class="row" id="rating_summary">
 							<div class="col-md-6">
 								<ul>
-									<li><strong>Email:</strong> {{user.email}}</li>
+									<li>
+                                        <strong>Firstname:</strong> 
+                                        <input type="text" class="form-control" value="{{user.firstname}}" ng-model="user.firstname">
+                                    </li>
 								</ul>
 							</div>
 							<div class="col-md-6">
 								<ul>
 									<li>
-										<strong>Role:</strong>
-										<span ng-if="user.admin">Admin</span>
-                                        <span ng-if="!(user.company) && !(user.admin)">Consumer</span>
-									</li>
+                                        <strong>Lastname:</strong> 
+                                        <input type="text" class="form-control" value="{{user.lastname}}" ng-model="user.lastname">
+                                    </li>
+								</ul>
+							</div>
+						</div><!-- End row -->
+                        <div class="row" id="rating_summary">
+							<div class="col-md-6">
+								<ul>
+									<li>
+                                        <strong>Username:</strong> 
+                                        <input type="text" class="form-control" value="{{user.username}}" ng-model="user.username">
+                                    </li>
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<ul>
+									<li>
+                                        <strong>Email:</strong> 
+                                        <input type="text" class="form-control" value="{{user.email}}" ng-model="user.email">
+                                    </li>
 								</ul>
 							</div>
 						</div><!-- End row -->
 						<hr class="styled">
-						<a ui-sref="app.profile-edit" class="btn_1 add_bottom_15">Edit profile</a>
+						<a ng-click="editProfile()" class="btn_1 add_bottom_15">Save</a>
 					
                     
 				</div><!-- End box_style_1 -->

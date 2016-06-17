@@ -21,6 +21,12 @@ angular.module('orderSystemApp')
             $localStorage.storeObject('userinfo',$scope.loginData);
 
             AuthFactory.login($scope.loginData);
+
+            ngDialog.close();
+        };
+
+        $scope.openRegister = function () {
+            ngDialog.open({ template: 'views/front/register.html', scope: $scope, className: 'ngdialog-theme-plain', controller:"RegisterCtrl" });
         };
         
         if(AuthFactory.isAuthenticated()) {
@@ -37,7 +43,7 @@ angular.module('orderSystemApp')
             $scope.localstorage = $localStorage.getObject('Token','{}');
             
             if(!('companyId' in $scope.localstorage) && !('admin' in $scope.localstorage)) {
-                $state.go('app');
+                $state.go('app.profile');
             }
             
             // if(!$scope.company) {

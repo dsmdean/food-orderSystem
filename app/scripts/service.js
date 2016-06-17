@@ -112,6 +112,26 @@ angular.module('orderSystemApp')
 
 }])
 
+.factory('userFavoritesFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "users/:id/favorites/:favoriteId", null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
+.factory('userOrdersFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "users/:id/orders", null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
 .factory('$localStorage', ['$window', function ($window) {
     return {
         store: function (key, value) {

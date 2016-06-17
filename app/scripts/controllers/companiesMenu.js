@@ -8,11 +8,14 @@
  * Controller of the orderSystemApp
  */
 angular.module('orderSystemApp')
-    .controller('CompaniesMenuCtrl', ['$scope', '$rootScope', 'AuthFactory', 'companyFactory', 'companyCategoryDishesFactory', 'dishesCategoryFactory', '$state', '$stateParams', 'ngDialog', function ($scope, $rootScope, AuthFactory, companyFactory, companyCategoryDishesFactory, dishesCategoryFactory, $state, $stateParams, ngDialog) {
+    .controller('CompaniesMenuCtrl', ['$scope', '$rootScope', 'AuthFactory', 'companyFactory', 'companyCategoryDishesFactory', 'dishesCategoryFactory', 'userFavoritesFactory', '$state', '$stateParams', '$localStorage', 'ngDialog', function ($scope, $rootScope, AuthFactory, companyFactory, companyCategoryDishesFactory, dishesCategoryFactory, userFavoritesFactory, $state, $stateParams, $localStorage, ngDialog) {
         $scope.tabId = '';
         $scope.dishcategory = '';
         $scope.overallR = 0;
         $scope.loggedIn = false;
+        $scope.favorites = '';
+
+        $scope.localstorage = '';
 
         $scope.company = companyFactory.get({
             id: $stateParams.id
@@ -113,9 +116,22 @@ angular.module('orderSystemApp')
 
         if(AuthFactory.isAuthenticated()) {
             $scope.loggedIn = true;
+            $scope.localstorage = $localStorage.getObject('Token','{}');
+            
         }
 
         $rootScope.$on('login:Successful', function () {
             $scope.loggedIn = AuthFactory.isAuthenticated();
+            $scope.localstorage = $localStorage.getObject('Token','{}');
+            
         });
+
+        $scope.addFavorite = function (companyId) {
+            var companyId = {
+                "company": companyId
+            };
+            userFavoritesFactory.save({id: $scope.localstorage.id}, companyId);
+
+            $state.go('app.favorites', {}, {reload: true});
+        };
     }]);

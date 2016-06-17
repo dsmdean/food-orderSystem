@@ -1,0 +1,94 @@
+<section class="parallax-window subheader-custom" id="short"  data-parallax="scroll" data-image-src="images/sub_header_2.jpg" data-natural-width="1400" data-natural-height="350" style="background-image: url('images/sub_header_2.jpg');">
+    <div id="subheader">
+    	<div id="sub_content">
+    	 <h1>My Orders</h1>
+         <p>Qui debitis meliore ex, tollit debitis conclusionemque te eos.</p>
+        </div><!-- End sub_content -->
+	</div><!-- End subheader -->
+</section><!-- End section -->
+
+    <div id="position">
+        <div class="container">
+            <ul>
+                <li><a href="#0">Home</a></li>
+                <li>User</li>
+                <li>Orders</li>
+            </ul>
+        </div>
+    </div><!-- Position -->
+
+<!-- Content ================================================== -->
+<div class="container margin_60_35">
+	<div class="row">
+        <div class="col-md-4">
+            <div class="box_style_2 hidden-xs" id="help">
+                <i class="icon_lifesaver"></i>
+                <h4>Need <span>Help?</span></h4>
+                <a href="tel://004542344599" class="phone">+45 423 445 99</a>
+                <small>Monday to Friday 9.00am - 7.30pm</small>
+                
+                <hr class="styled">
+                <a ui-sref="app.contactus" class="btn_1 add_bottom_15">Contact Us</a>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card" ng-repeat="order in orders">
+                <div class="card-header" style="background-color: #78cfcf; color: #fff;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Order ID</strong><br>
+                            {{order._id}}
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Client</strong><br>
+                            {{order.userId.firstname}} {{order.userId.lastname}}
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Order Placed</strong><br>
+                            {{order.createdAt | date:'MMM. dd, yyyy'}}
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Total</strong><br>
+                            {{order.totalPrice/100 | currency}}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Quantity</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Sub Total</strong>
+                        </div>
+                    </div>
+                    <div class="row" ng-repeat="details in order.details">
+                        <div class="col-md-8 media">
+                            <div class="media-left media-middle">
+                                <a>
+                                <img class="media-object img-thumbnail"
+                                src="https://account.socialbakers.com/default_user.png" width="75">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <strong class="media-heading">{{details.dishId.name}}</strong>
+                                <br>
+                                {{details.dishId.description | limitTo:80}}...
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            {{details.quantity}}
+                        </div>
+                        <div class="col-md-2">
+                            {{details.SubTotalPrice/100 | currency}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End row -->
+</div><!-- End container -->
+<!-- End Content =============================================== -->
