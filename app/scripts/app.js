@@ -158,7 +158,8 @@ angular
         url:'order-checkout',
         views: {
           'content@': {
-            templateUrl : 'views/front/order-checkout.html'                 
+            templateUrl : 'views/front/order-checkout.html',
+            controller  : 'CheckoutCtrl'                           
           }
         }
       })

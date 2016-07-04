@@ -81,7 +81,7 @@
 							<strong>{{dish.price/100 | currency}}</strong>
 						</td>
 						<td class="options">
-							<a href=""><i class="icon_plus_alt2"></i></a>
+							<a href="" ng-click="addToCart(dish.name, dish.price)"><i class="icon_plus_alt2"></i></a>
 						</td>
 					</tr>
 					</tbody>
@@ -94,44 +94,14 @@
 					<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
 					<table class="table table_summary">
 					<tbody>
-					<tr>
+					<tr ng-repeat="product in cart.products">
 						<td>
-							<a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>1x</strong> Enchiladas
+							<a href="" ng-click="minQuantity($index)" class="remove_item"><i class="icon_minus_alt"></i></a> 
+							<a href="" ng-click="plusQuantity($index)" class="remove_item"><i class="icon_plus_alt"></i></a>
+							<strong>{{product.quantity}}x</strong> {{product.dishName}} 
 						</td>
 						<td>
-							<strong class="pull-right">$11</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>2x</strong> Burrito
-						</td>
-						<td>
-							<strong class="pull-right">$14</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>1x</strong> Chicken
-						</td>
-						<td>
-							<strong class="pull-right">$20</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>2x</strong> Corona Beer
-						</td>
-						<td>
-							<strong class="pull-right">$9</strong>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>2x</strong> Cheese Cake
-						</td>
-						<td>
-							<strong class="pull-right">$12</strong>
+							<strong class="pull-right">{{product.subtotal/100 | currency}}</strong>
 						</td>
 					</tr>
 					</tbody>
@@ -149,6 +119,7 @@
 					<hr>
 					<table class="table table_summary">
 					<tbody>
+					<!--
 					<tr>
 						<td>
 							 Subtotal <span class="pull-right">$56</span>
@@ -159,15 +130,16 @@
 							 Delivery fee <span class="pull-right">$10</span>
 						</td>
 					</tr>
+					-->
 					<tr>
 						<td class="total">
-							 TOTAL <span class="pull-right">$66</span>
+							 TOTAL <span class="pull-right">{{cart.total/100 | currency}}</span>
 						</td>
 					</tr>
 					</tbody>
 					</table>
 					<hr>
-					<a class="btn_full" ui-sref="app.order-details">Order now</a>
+					<a class="btn_full" ng-click="checkout()">Order now</a>
 				</div><!-- End cart_box -->
 			</div><!-- End col-md-3 -->
             

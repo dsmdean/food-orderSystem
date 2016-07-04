@@ -14,6 +14,10 @@ angular.module('orderSystemApp')
         $scope.overallR = 0;
         $scope.loggedIn = false;
         $scope.favorites = '';
+        $scope.cart = {
+            products: [],
+            total: 0
+        };
 
         $scope.localstorage = '';
 
@@ -134,4 +138,60 @@ angular.module('orderSystemApp')
 
             $state.go('app.favorites', {}, {reload: true});
         };
+
+        $scope.addToCart = function(name, price) {
+            var inArray = [false, 0];
+
+            for(var i = 0; i < $scope.cart.products.length; i++) {
+                if($scope.cart.products[i].dishName == name) {
+                    inArray = [true, i];
+                };
+            }
+
+            if(!inArray[0]) {
+                $scope.cart.products.push({
+                    dishName: name,
+                    quantity: 1,
+                    price: price,
+                    subtotal: price
+                });
+            } else {
+                $scope.cart.products[inArray[1]].quantity ++;
+                $scope.cart.products[inArray[1]].subtotal = $scope.cart.products[inArray[1]].quantity * $scope.cart.products[inArray[1]].price;
+            }
+
+            $scope.cartTotal();
+        }
+
+        $scope.plusQuantity = function(index) {
+            $scope.cart.products[index].quantity ++;
+            $scope.cart.products[index].subtotal = $scope.cart.products[index].quantity * $scope.cart.products[index].price;
+
+            $scope.cartTotal();
+        }
+
+        $scope.minQuantity = function(index) {
+            $scope.cart.products[index].quantity --;
+            $scope.cart.products[index].subtotal = $scope.cart.products[index].quantity * $scope.cart.products[index].price;
+
+            if($scope.cart.products[index].quantity == 0) {
+                $scope.cart.products.splice(index, 1);
+            }
+
+            $scope.cartTotal();
+        }
+
+        $scope.cartTotal = function() {
+            var total = 0;
+            for(var i = 0; i < $scope.cart.products.length; i++) {
+                total += $scope.cart.products[i].subtotal;
+            }
+
+            $scope.cart.total = total;
+        }
+
+        $scope.checkout = function() {
+            $localStorage.storeObject('cart', $scope.cart);
+            $state.go("app.order-checkout");
+        }
     }]);
