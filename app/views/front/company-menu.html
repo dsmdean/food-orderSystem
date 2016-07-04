@@ -81,7 +81,7 @@
 							<strong>{{dish.price/100 | currency}}</strong>
 						</td>
 						<td class="options">
-							<a href="" ng-click="addToCart(dish.name, dish.price)"><i class="icon_plus_alt2"></i></a>
+							<a href="" ng-click="addToCart(dish._id, dish.name, dish.price)"><i class="icon_plus_alt2"></i></a>
 						</td>
 					</tr>
 					</tbody>
@@ -94,14 +94,14 @@
 					<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
 					<table class="table table_summary">
 					<tbody>
-					<tr ng-repeat="product in cart.products">
+					<tr ng-repeat="product in cart.details">
 						<td>
 							<a href="" ng-click="minQuantity($index)" class="remove_item"><i class="icon_minus_alt"></i></a> 
 							<a href="" ng-click="plusQuantity($index)" class="remove_item"><i class="icon_plus_alt"></i></a>
 							<strong>{{product.quantity}}x</strong> {{product.dishName}} 
 						</td>
 						<td>
-							<strong class="pull-right">{{product.subtotal/100 | currency}}</strong>
+							<strong class="pull-right">{{product.SubTotalPrice/100 | currency}}</strong>
 						</td>
 					</tr>
 					</tbody>
@@ -133,7 +133,7 @@
 					-->
 					<tr>
 						<td class="total">
-							 TOTAL <span class="pull-right">{{cart.total/100 | currency}}</span>
+							 TOTAL <span class="pull-right">{{cart.totalPrice/100 | currency}}</span>
 						</td>
 					</tr>
 					</tbody>

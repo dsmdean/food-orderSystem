@@ -132,6 +132,16 @@ angular.module('orderSystemApp')
 
 }])
 
+.factory('ordersFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "orders/:id", null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+}])
+
 .factory('$localStorage', ['$window', function ($window) {
     return {
         store: function (key, value) {

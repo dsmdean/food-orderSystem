@@ -14,11 +14,10 @@ angular.module('orderSystemApp')
         $scope.overallR = 0;
         $scope.loggedIn = false;
         $scope.favorites = '';
-        $scope.cart = {
-            products: [],
-            total: 0
-        };
 
+        $scope.goToCheckout = false;
+        
+        $scope.loginData = $localStorage.getObject('userinfo','{}');
         $scope.localstorage = '';
 
         $scope.company = companyFactory.get({
@@ -127,7 +126,10 @@ angular.module('orderSystemApp')
         $rootScope.$on('login:Successful', function () {
             $scope.loggedIn = AuthFactory.isAuthenticated();
             $scope.localstorage = $localStorage.getObject('Token','{}');
-            
+
+            if($scope.goToCheckout) {
+                $scope.checkout();
+            }
         });
 
         $scope.addFavorite = function (companyId) {
@@ -139,43 +141,53 @@ angular.module('orderSystemApp')
             $state.go('app.favorites', {}, {reload: true});
         };
 
-        $scope.addToCart = function(name, price) {
+        if(Object.keys($localStorage.getObject('cart','{}')).length == 0) {
+            $scope.cart = {
+                details: [],
+                totalPrice: 0
+            };
+        } else {
+            $scope.cart = $localStorage.getObject('cart','{}');
+        }
+
+        $scope.addToCart = function(id, name, price) {
             var inArray = [false, 0];
 
-            for(var i = 0; i < $scope.cart.products.length; i++) {
-                if($scope.cart.products[i].dishName == name) {
+            for(var i = 0; i < $scope.cart.details.length; i++) {
+                if($scope.cart.details[i].dishName == name) {
                     inArray = [true, i];
                 };
             }
 
             if(!inArray[0]) {
-                $scope.cart.products.push({
+                $scope.cart.details.push({
+                    dishId: id,
                     dishName: name,
                     quantity: 1,
                     price: price,
-                    subtotal: price
+                    SubTotalPrice: price
                 });
             } else {
-                $scope.cart.products[inArray[1]].quantity ++;
-                $scope.cart.products[inArray[1]].subtotal = $scope.cart.products[inArray[1]].quantity * $scope.cart.products[inArray[1]].price;
+                $scope.cart.details[inArray[1]].quantity ++;
+                $scope.cart.details[inArray[1]].SubTotalPrice = $scope.cart.details[inArray[1]].quantity * $scope.cart.details[inArray[1]].price;
             }
 
             $scope.cartTotal();
         }
 
         $scope.plusQuantity = function(index) {
-            $scope.cart.products[index].quantity ++;
-            $scope.cart.products[index].subtotal = $scope.cart.products[index].quantity * $scope.cart.products[index].price;
+            $scope.cart.details[index].quantity ++;
+            $scope.cart.details[index].SubTotalPrice = $scope.cart.details[index].quantity * $scope.cart.details[index].price;
 
             $scope.cartTotal();
         }
 
         $scope.minQuantity = function(index) {
-            $scope.cart.products[index].quantity --;
-            $scope.cart.products[index].subtotal = $scope.cart.products[index].quantity * $scope.cart.products[index].price;
+            $scope.cart.details[index].quantity --;
+            $scope.cart.details[index].SubTotalPrice = $scope.cart.details[index].quantity * $scope.cart.details[index].price;
 
-            if($scope.cart.products[index].quantity == 0) {
-                $scope.cart.products.splice(index, 1);
+            if($scope.cart.details[index].quantity == 0) {
+                $scope.cart.details.splice(index, 1);
             }
 
             $scope.cartTotal();
@@ -183,15 +195,28 @@ angular.module('orderSystemApp')
 
         $scope.cartTotal = function() {
             var total = 0;
-            for(var i = 0; i < $scope.cart.products.length; i++) {
-                total += $scope.cart.products[i].subtotal;
+            for(var i = 0; i < $scope.cart.details.length; i++) {
+                total += $scope.cart.details[i].SubTotalPrice;
             }
 
-            $scope.cart.total = total;
+            $scope.cart.totalPrice = total;
         }
 
         $scope.checkout = function() {
-            $localStorage.storeObject('cart', $scope.cart);
-            $state.go("app.order-checkout");
+            if(!$scope.loggedIn) {
+                $scope.doLogin();
+
+                $scope.goToCheckout = true;
+            } else {
+                $scope.cart.companyId = $scope.company._id;
+                $scope.cart.userId = $scope.localstorage.id;
+                $localStorage.storeObject('cart', $scope.cart);
+                console.log($scope.cart);
+                $state.go("app.order-checkout");
+            }
         }
+
+        $scope.doLogin = function() {
+            ngDialog.open({ template: 'views/front/login.html', scope: $scope, className: 'ngdialog-theme-plain', controller:"LoginCtrl" });
+        };
     }]);
