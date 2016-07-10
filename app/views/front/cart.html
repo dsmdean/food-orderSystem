@@ -1,0 +1,127 @@
+	<section class="parallax-window subheader-custom" id="short" data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350" style="background-image: url('images/sub_header_cart.jpg');">
+		<div id="subheader">
+			<div id="sub_content">
+			<h1>Place your order</h1>
+			<div class="bs-wizard">
+				<div class="col-xs-4 bs-wizard-step active">
+					<div class="text-center bs-wizard-stepnum"><strong>1.</strong> Your order</div>
+					<div class="progress"><div class="progress-bar"></div></div>
+					<a class="bs-wizard-dot"></a>
+				</div>
+				<div class="col-xs-4 bs-wizard-step disabled">
+					<div class="text-center bs-wizard-stepnum"><strong>2.</strong> Your details</div>
+					<div class="progress"><div class="progress-bar"></div></div>
+					<a class="bs-wizard-dot"></a>
+				</div>
+								
+				<div class="col-xs-4 bs-wizard-step disabled">
+					<div class="text-center bs-wizard-stepnum"><strong>3.</strong> Finish!</div>
+					<div class="progress"><div class="progress-bar"></div></div>
+					<a ui-sref="app.order-finish" class="bs-wizard-dot"></a>
+				</div>  
+			</div><!-- End bs-wizard -->
+			</div><!-- End sub_content -->
+		</div><!-- End subheader -->
+	</section><!-- End section -->
+
+    <div id="position">
+        <div class="container">
+            <ul>
+                <li><a href="#0">Home</a></li>
+				<li>Cart</li>
+            </ul>
+        </div>
+    </div><!-- Position -->
+
+<!-- Content ================================================== -->
+<div class="container margin_60_35">
+	<div id="container_pin">
+		<div class="row">
+			<div class="col-md-3">
+            
+				<div class="box_style_2 hidden-xs info">
+					<h4 class="nomargin_top">Delivery time <i class="icon_clock_alt pull-right"></i></h4>
+					<p>
+						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
+					</p>
+					<hr>
+					<h4>Accepted payment <i class="icon_creditcard pull-right"></i></h4>
+					<p>
+						Lorem ipsum dolor sit amet, in pri partem essent. Qui debitis meliore ex, tollit debitis conclusionemque te eos.
+					</p>
+				</div><!-- End box_style_1 -->
+                
+				<div class="box_style_2 hidden-xs" id="help">
+					<i class="icon_lifesaver"></i>
+					<h4>Need <span>Help?</span></h4>
+					<a href="tel://004542344599" class="phone">+45 423 445 99</a>
+					<small>Monday to Friday 9.00am - 7.30pm</small>
+				</div>
+                
+			</div><!-- End col-md-3 -->
+            
+			<div class="col-md-6">
+				<div class="box_style_2" id="order_process">
+					<h2 class="inner">Your cart</h2>
+					<table class="table table_summary">
+					<tbody ng-repeat="shop in cart">
+						<tr>
+                        	<td><a ui-sref="app.company-menu({id: shop.companyId})"><strong>{{shop.companyName}}</strong></a></td>
+						</tr>
+                        <tr ng-repeat="product in shop.details">
+                            <td>
+                                <strong>{{product.quantity}}x </strong>{{product.dishName}} 
+                            </td>
+                            <td>
+                                <strong class="pull-right">{{product.SubTotalPrice/100 | currency}}</strong>
+                            </td>
+                        </tr>
+						<tr>
+                        	<td><strong class="pull-right">Subtotal: {{shop.totalPrice/100 | currency}}</strong></td>
+						</tr>
+					</tbody>
+					</table>
+					<hr>
+					<table class="table table_summary">
+					<tbody>
+					<tr>
+						<td class="total">
+							 TOTAL <span class="pull-right">{{cartTotal/100 | currency}}</span>
+						</td>
+					</tr>
+					</tbody>
+					</table>
+				</div><!-- End box_style_1 -->
+			</div><!-- End col-md-6 -->
+            
+			<div class="col-md-3">
+				<div id="cart_box">
+					<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
+					<div class="row" id="options_2">
+						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+							<label><input type="radio" value="" checked name="option_2" class="icheck">Delivery</label>
+						</div>
+						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+							<label><input type="radio" value="" name="option_2" class="icheck">Take Away</label>
+						</div>
+					</div><!-- Edn options 2 -->
+					<hr>
+					<table class="table table_summary">
+					<tbody>
+					<tr>
+						<td class="total">
+							 TOTAL <span class="pull-right">{{cart.totalPrice/100 | currency}}</span>
+						</td>
+					</tr>
+					</tbody>
+					</table>
+					<hr>
+					<a class="btn_full" ng-click="submitOrder()">Go to checkout</a>
+					<a class="btn_full_outline" ng-click="goBack()"><i class="icon-right"></i> Add other items</a>
+				</div><!-- End cart_box -->
+			</div><!-- End col-md-3 -->
+            
+		</div><!-- End row -->
+	</div><!-- End container pin -->
+</div><!-- End container -->
+<!-- End Content =============================================== -->

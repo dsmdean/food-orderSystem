@@ -66,7 +66,7 @@
 							<div class="rating">
 								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i> (<small><a href="#0">98 reviews</a></small>)
 							</div>
-							<h3>{{favorite.company.name}}</h3>
+							<h3><a ui-sref="app.company-menu({id: favorite.company._id})">{{favorite.company.name}}</a></h3>
 							<div class="type">
 								{{favorite.company.categoryId.name}}
 							</div>

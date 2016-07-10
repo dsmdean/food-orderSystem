@@ -10,9 +10,22 @@
 angular.module('orderSystemApp')
     .controller('CheckoutCtrl', ['$scope', '$localStorage', 'AuthFactory', 'userFactory', 'ordersFactory', '$rootScope', '$state', function ($scope, $localStorage, AuthFactory, userFactory, ordersFactory, $rootScope, $state) {
         $scope.checkoutSuccess = false;
-        $scope.cart = $localStorage.getObject('cart','{}');
+        // $scope.cart = $localStorage.getObject('cart','{}');
+        $scope.cart = [];
         $scope.localstorage = $localStorage.getObject('Token','{}');
 
+        for ( var i = 0, len = localStorage.length; i < len; i++ ) {
+            var key = localStorage.key(i);
+            var json = localStorage.getItem(key);
+            var result = JSON.parse(json);
+
+            if(key.indexOf('cart') === 0) {
+                $scope.cart.push(result);
+            }
+        }
+        //console.log($scope.cart);
+        $localStorage.storeObject('cart', $scope.cart);
+        
         $scope.cartTotal = function() {
             var total = 0;
             for(var i = 0; i < $scope.cart.details.length; i++) {
@@ -31,6 +44,8 @@ angular.module('orderSystemApp')
             }
 
             $scope.cartTotal();
+            $localStorage.storeObject('cart', $scope.cart);
+            $rootScope.$broadcast('cart:Edit');
         }
 
         $scope.goBack = function() {

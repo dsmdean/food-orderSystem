@@ -142,6 +142,17 @@ angular
         }
       })
 
+      // route for the order details page
+      .state('app.cart', {
+        url:'cart',
+        views: {
+          'content@': {
+            templateUrl : 'views/front/cart.html',
+            controller  : 'CartCtrl'                    
+          }
+        }
+      })
+
       // route for the orders page
       .state('app.orders', {
         url:'orders',

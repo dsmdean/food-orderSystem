@@ -141,14 +141,22 @@ angular.module('orderSystemApp')
             $state.go('app.favorites', {}, {reload: true});
         };
 
-        if(Object.keys($localStorage.getObject('cart','{}')).length == 0) {
+        if(Object.keys($localStorage.getObject('cart_' + $stateParams.id,'{}')).length == 0) {
             $scope.cart = {
                 details: [],
                 totalPrice: 0
             };
         } else {
-            $scope.cart = $localStorage.getObject('cart','{}');
+            $scope.cart = $localStorage.getObject('cart_' + $stateParams.id,'{}');
         }
+
+        // if(Object.keys($localStorage.getObject('totalCart','{}')).length == 0) {
+        //     $scope.totalCart = {total: 0};
+        //     // console.log($scope.totalCart);
+        // } else {
+        //     $scope.totalCart = $localStorage.getObject('totalCart','{}');
+        // }
+        // // console.log($scope.totalCart);
 
         $scope.addToCart = function(id, name, price) {
             var inArray = [false, 0];
@@ -173,6 +181,12 @@ angular.module('orderSystemApp')
             }
 
             $scope.cartTotal();
+            $scope.cart.companyId = $scope.company._id;
+            $scope.cart.companyName = $scope.company.name;
+            $localStorage.storeObject('cart_' + $scope.company._id, $scope.cart);
+            // var total = $scope.totalCart.total ++;
+            // $localStorage.storeObject('totalCart', {total: total});
+            $rootScope.$broadcast('cart:Edit');
         }
 
         $scope.plusQuantity = function(index) {
@@ -180,6 +194,8 @@ angular.module('orderSystemApp')
             $scope.cart.details[index].SubTotalPrice = $scope.cart.details[index].quantity * $scope.cart.details[index].price;
 
             $scope.cartTotal();
+            $localStorage.storeObject('cart_' + $scope.company._id, $scope.cart);
+            $rootScope.$broadcast('cart:Edit');
         }
 
         $scope.minQuantity = function(index) {
@@ -188,9 +204,13 @@ angular.module('orderSystemApp')
 
             if($scope.cart.details[index].quantity == 0) {
                 $scope.cart.details.splice(index, 1);
+                // var total = $scope.totalCart.total --;
+                // $localStorage.storeObject('totalCart', {total: total});
             }
 
             $scope.cartTotal();
+            $localStorage.storeObject('cart_' + $scope.company._id, $scope.cart);
+            $rootScope.$broadcast('cart:Edit');
         }
 
         $scope.cartTotal = function() {
@@ -210,8 +230,8 @@ angular.module('orderSystemApp')
             } else {
                 $scope.cart.companyId = $scope.company._id;
                 $scope.cart.userId = $scope.localstorage.id;
-                $localStorage.storeObject('cart', $scope.cart);
-                console.log($scope.cart);
+                $localStorage.storeObject('cart_' + $scope.company._id, $scope.cart);
+                $rootScope.$broadcast('cart:Edit');
                 $state.go("app.order-checkout");
             }
         }

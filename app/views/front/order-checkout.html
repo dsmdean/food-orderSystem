@@ -118,10 +118,12 @@
 					<h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
 					<table class="table table_summary">
 					<tbody>
-					<tr ng-repeat="product in cart.details">
+					<tr ng-repeat="product in cart[1].details">
+						<div>
 						<td>
 							<a href="" ng-click="minQuantity($index)" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>{{product.quantity}}x</strong>{{product.dishName}} 
 						</td>
+						</div>
 						<td>
 							<strong class="pull-right">{{product.SubTotalPrice/100 | currency}}</strong>
 						</td>
