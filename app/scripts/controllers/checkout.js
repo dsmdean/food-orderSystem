@@ -10,47 +10,25 @@
 angular.module('orderSystemApp')
     .controller('CheckoutCtrl', ['$scope', '$localStorage', 'AuthFactory', 'userFactory', 'ordersFactory', '$rootScope', '$state', function ($scope, $localStorage, AuthFactory, userFactory, ordersFactory, $rootScope, $state) {
         $scope.checkoutSuccess = false;
-        // $scope.cart = $localStorage.getObject('cart','{}');
-        $scope.cart = [];
+        $scope.cartTotal = 0;
         $scope.localstorage = $localStorage.getObject('Token','{}');
+        $scope.cart = $localStorage.getObject('cart','[]');
 
-        for ( var i = 0, len = localStorage.length; i < len; i++ ) {
+        for(var i = 0; i < $scope.cart.length; i++) {
+            $scope.cartTotal += $scope.cart[i].totalPrice;
+        }
+
+        for(var i = 0, len = localStorage.length; i < len; i++) {
             var key = localStorage.key(i);
             var json = localStorage.getItem(key);
             var result = JSON.parse(json);
+            var cart_id;
 
-            if(key.indexOf('cart') === 0) {
-                $scope.cart.push(result);
+            if(key.indexOf('cart_') === 0) {
+                cart_id = $localStorage.getObject(key,'{}');
+                cart_id.userId = $scope.localstorage.id;
+                $localStorage.storeObject(key, cart_id);
             }
-        }
-        //console.log($scope.cart);
-        $localStorage.storeObject('cart', $scope.cart);
-        
-        $scope.cartTotal = function() {
-            var total = 0;
-            for(var i = 0; i < $scope.cart.details.length; i++) {
-                total += $scope.cart.details[i].SubTotalPrice;
-            }
-
-            $scope.cart.totalPrice = total;
-        }
-
-        $scope.minQuantity = function(index) {
-            $scope.cart.details[index].quantity --;
-            $scope.cart.details[index].SubTotalPrice = $scope.cart.details[index].quantity * $scope.cart.details[index].price;
-
-            if($scope.cart.details[index].quantity == 0) {
-                $scope.cart.details.splice(index, 1);
-            }
-
-            $scope.cartTotal();
-            $localStorage.storeObject('cart', $scope.cart);
-            $rootScope.$broadcast('cart:Edit');
-        }
-
-        $scope.goBack = function() {
-            $localStorage.storeObject('cart', $scope.cart);
-            window.history.back();
         }
 
         $scope.user = userFactory.get({
@@ -66,9 +44,21 @@ angular.module('orderSystemApp')
         );
 
         $scope.submitOrder = function() {
-            ordersFactory.save($scope.cart);
-            $scope.checkoutSuccess = true;
+            for(var i = 0, len = localStorage.length; i < len; i++) {
+                var key = localStorage.key(i);
+                var json = localStorage.getItem(key);
+                var result = JSON.parse(json);
+                var cart_id;
+
+                if(key.indexOf('cart_') === 0) {
+                    cart_id = $localStorage.getObject(key,'{}');
+                    console.log(key);
+                    //ordersFactory.save(cart_id);
+                    $localStorage.remove(key);
+                }
+            }
             $localStorage.remove('cart');
-            //$state.go("app.order-finish");
+
+            $scope.checkoutSuccess = true;
         }
     }]);

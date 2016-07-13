@@ -19,6 +19,16 @@ angular.module('orderSystemApp')
         $scope.admin = false;
         $scope.cartTotal = 0;
 
+        for(var i = 0, len = localStorage.length; i < len; i++) {
+            var key = localStorage.key(i);
+            var json = localStorage.getItem(key);
+            var result = JSON.parse(json);
+
+            if(key.indexOf('cart_') === 0) {
+                $scope.cartTotal += result.details.length;
+            }
+        }
+
         // if(Object.keys($localStorage.getObject('totalCart','{}')).length == 0) {
         //     $scope.cartTotal = 0;
         // } else {
